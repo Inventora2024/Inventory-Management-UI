@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { RouterModule } from '@angular/router';
 import {
   faChartLine,
   faBoxesPacking,
@@ -14,7 +15,7 @@ import {
 @Component({
   selector: 'app-main-menu',
   standalone: true,
-  imports: [FontAwesomeModule],
+  imports: [RouterModule, FontAwesomeModule],
   templateUrl: './main-menu.component.html',
   styleUrl: './main-menu.component.css',
 })

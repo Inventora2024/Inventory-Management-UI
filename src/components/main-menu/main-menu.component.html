@@ -1,33 +1,73 @@
 <div class="main-menu">
-  <button type="button" class="btn">
+  <button
+    type="button"
+    class="btn"
+    routerLink="/dashboard"
+    [routerLink]="[{ outlets: { 'main-content': ['dashboard'] } }]"
+  >
     <fa-icon [icon]="faChartLine" class="main-menu-icon"></fa-icon>
     &nbsp;Dashboard
   </button>
-  <button type="button" class="btn">
+  <button
+    type="button"
+    class="btn"
+    routerLink="/suppliers"
+    [routerLink]="[{ outlets: { 'main-content': ['suppliers'] } }]"
+  >
     <fa-icon [icon]="faBoxesPacking" class="main-menu-icon"></fa-icon>
     &nbsp;Suppliers
   </button>
-  <button type="button" class="btn">
+  <button
+    type="button"
+    class="btn"
+    routerLink="/inventory"
+    [routerLink]="[{ outlets: { 'main-content': ['inventory'] } }]"
+  >
     <fa-icon [icon]="faWarehouse" class="main-menu-icon"></fa-icon>
     &nbsp;Inventory
   </button>
-  <button type="button" class="btn">
+  <button
+    type="button"
+    class="btn"
+    routerLink="/orders"
+    [routerLink]="[{ outlets: { 'main-content': ['orders'] } }]"
+  >
     <fa-icon [icon]="faCartShopping" class="main-menu-icon"></fa-icon>
     &nbsp;Orders
   </button>
-  <button type="button" class="btn">
+  <button
+    type="button"
+    class="btn"
+    routerLink="/shipment"
+    [routerLink]="[{ outlets: { 'main-content': ['shipment'] } }]"
+  >
     <fa-icon [icon]="faTruckFast" class="main-menu-icon"></fa-icon>
     &nbsp;Shipment
   </button>
-  <button type="button" class="btn">
+  <button
+    type="button"
+    class="btn"
+    routerLink="/sales"
+    [routerLink]="[{ outlets: { 'main-content': ['sales'] } }]"
+  >
     <fa-icon [icon]="faCashRegister" class="main-menu-icon"></fa-icon>
     &nbsp;Sales
   </button>
-  <button type="button" class="btn">
+  <button
+    type="button"
+    class="btn"
+    routerLink="/staff"
+    [routerLink]="[{ outlets: { 'main-content': ['staff'] } }]"
+  >
     <fa-icon [icon]="faUsersRectangle" class="main-menu-icon"></fa-icon>
     &nbsp;Staff
   </button>
-  <button type="button" class="btn">
+  <button
+    type="button"
+    class="btn"
+    routerLink="/products"
+    [routerLink]="[{ outlets: { 'main-content': ['products'] } }]"
+  >
     <fa-icon [icon]="faBoxes" class="main-menu-icon"></fa-icon>
     &nbsp;Products
   </button>
