@@ -1,0 +1,26 @@
+.main-menu {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  padding: 10% 3%;
+  background: rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(3.5px);
+  -webkit-backdrop-filter: blur(3.5px);
+  border-radius: 10px;
+}
+
+.main-menu .btn {
+  width: 100%;
+  color: white;
+  margin-bottom: 3%;
+  text-align: start;
+  font-size: large;
+}
+
+.main-menu .btn:focus {
+  color: darkviolet;
+  background-color: white;
+  box-shadow: none;
+  font-weight: bold;
+}

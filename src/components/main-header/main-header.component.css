@@ -1,0 +1,39 @@
+.titlebar {
+  position: relative;
+  padding: 0% 1%;
+  height: 100%;
+  background-color: darkviolet;
+  justify-content: space-between;
+}
+
+.navbar-brand {
+  position: relative;
+  height: 100%;
+  width: 20%;
+  background-color: darkviolet;
+}
+
+.brandlogo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: left;
+  float: left;
+}
+
+.profile-icon {
+  color: darkviolet;
+  font-size: x-large;
+}
+
+.profile-menu-icon {
+  color: darkviolet;
+}
+
+.dropdown-item {
+  font-weight: bold;
+}
+
+.profile-greeting {
+  color: darkviolet;
+}
