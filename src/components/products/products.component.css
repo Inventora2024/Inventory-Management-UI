@@ -1,0 +1,55 @@
+hr {
+  border: 1px solid black;
+}
+
+.product-heading-container {
+  /* background-color: skyblue; */
+}
+
+.product-heading {
+  position: relative;
+  width: 70%;
+  font-size: x-large;
+  font-weight: bolder;
+  color: darkviolet;
+  /* background-color: aquamarine; */
+}
+
+.add-button-container {
+  position: relative;
+  width: 30%;
+  /* background-color: rgb(18, 65, 49); */
+  display: flex;
+  gap: 10px; /* Add space between buttons if needed */
+  justify-content: flex-end; /* Align buttons to the right */
+}
+
+.btn {
+  position: relative;
+  width: auto; /* Prevent the buttons from taking full width */
+  flex: 0 0 auto; /* Prevent buttons from stretching */
+  white-space: nowrap; /* Ensure text stays on one line */
+}
+
+.card {
+  cursor: pointer;
+}
+
+.line-clamp-1 {
+  display: -webkit-box;
+  line-clamp: 1;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+

@@ -1,1 +1,51 @@
-<p>products works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 mb-3" *ngFor="let product of products">
+      <div class="card" (click)="openModal(product)">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img [src]="" class="img-fluid rounded-start" alt="..." />
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title line-clamp-1">{{ product.name }}</h5>
+              <p class="card-text line-clamp-2">{{ product.description }}</p>
+              <p class="card-text">{{ product.category }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="productModal"
+    tabindex="-1"
+    aria-labelledby="productModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="productModalLabel">
+            {{ selectedProduct?.name }}
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <img [src]="" class="img-fluid" alt="..." />
+          <p><strong>Description:</strong> {{ selectedProduct?.description }}</p>
+          <p><strong>Category:</strong> {{ selectedProduct?.category }}</p>
+          <p><strong>Stock:</strong> {{ selectedProduct?.stock }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

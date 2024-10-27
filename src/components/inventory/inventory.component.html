@@ -191,10 +191,10 @@
     </thead>
     <tbody>
       <tr *ngFor="let product of filteredProducts">
-        <td style="width: 25%">{{ product.name }}</td>
-        <td style="width: 45%">{{ product.description }}</td>
-        <td style="width: 10%">{{ product.stock }}</td>
-        <td style="width: 20%">{{ product.category }}</td>
+        <td class="product-name">{{ product.name }}</td>
+        <td class="product-description">{{ product.description }}</td>
+        <td class="product-stock">{{ product.stock }}</td>
+        <td class="product-category">{{ product.category }}</td>
       </tr>
     </tbody>
   </table>

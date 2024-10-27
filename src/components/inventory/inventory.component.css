@@ -39,6 +39,25 @@
   box-sizing: border-box; /* Ensure padding and border are included in width and height calculations */
 }
 
+.product-name {
+  width: 25%;
+}
+
+.product-description {
+  width: 45%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis; /* Show ellipsis for overflowed text */
+}
+
+.product-stock {
+  width: 10%;
+}
+
+.product-category {
+  width: 20%;
+}
+
 .table th {
   cursor: default; /* Make headers default cursor */
 }
