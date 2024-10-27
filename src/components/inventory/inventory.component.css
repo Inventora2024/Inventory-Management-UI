@@ -1,0 +1,104 @@
+.table-container {
+  height: 100%; /* Use full height of the container */
+  display: flex;
+  flex-direction: column;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.table thead {
+  background-color: white; /* Ensure the header has a background */
+  z-index: 10; /* Ensure the header stays on top */
+  display: table;
+  width: calc(100% - 16px); /* Account for the scrollbar width */
+  table-layout: fixed;
+}
+
+.table tbody {
+  flex: 1 1 auto; /* Tbody takes the remaining space */
+  overflow-y: auto; /* Enables vertical scrolling */
+  display: block;
+  width: 100%;
+}
+
+.table tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.table th,
+.table td {
+  border: none;
+  box-sizing: border-box; /* Ensure padding and border are included in width and height calculations */
+}
+
+.table th {
+  cursor: default; /* Make headers default cursor */
+}
+
+.th-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form-control {
+  width: 100%;
+}
+
+.sort-icon,
+.filter-icon {
+  cursor: pointer; /* Icons are clickable */
+  margin-left: 1%; /* Use percentage value */
+}
+
+.dropdown-menu {
+  width: 300px; /* Adjust width as needed */
+  max-height: 400px; /* Adjust height as needed */
+  overflow-y: auto; /* Enables vertical scrolling */
+  position: absolute;
+  right: 0;
+  background: lightgray;
+  border: 1px solid black;
+  padding: 5px;
+  z-index: 1000;
+  box-shadow: 0 2% 8% rgba(0, 0, 0, 0.15); /* Use percentage values */
+}
+
+.form-check-label {
+  margin-left: 2%; /* Adjust margin as needed */
+}
+
+.btn-group {
+  position: relative;
+}
+
+.btn:focus,
+.btn.active {
+  box-shadow: none;
+}
+
+/* Custom Scrollbar Styles */
+.table-container::-webkit-scrollbar {
+  width: 10px; /* Fixed width for the scrollbar */
+}
+
+.table-container::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Background color of the scrollbar track */
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  background: #888; /* Background color of the scrollbar thumb */
+  border-radius: 10px; /* Roundness of the scrollbar thumb */
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Color when hovered */
+}

@@ -34,6 +34,12 @@
   font-weight: bold;
 }
 
+.dropdown-item:focus,
+.dropdown-item:focus.active {
+  background-color: lightgrey;
+  color: darkviolet;
+}
+
 .profile-greeting {
   color: darkviolet;
 }

@@ -18,7 +18,8 @@
   font-size: large;
 }
 
-.main-menu .btn:focus {
+.main-menu .btn:focus,
+.main-menu .btn.active {
   color: darkviolet;
   background-color: white;
   box-shadow: none;

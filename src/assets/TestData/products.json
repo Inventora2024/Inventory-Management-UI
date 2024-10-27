@@ -1,0 +1,122 @@
+[
+  {
+    "name": "Acer Aspire 5",
+    "description": "15.6-inch laptop with Intel i5 processor and 8GB RAM.",
+    "stock": 52,
+    "category": "Laptop"
+  },
+  {
+    "name": "MacBook Pro",
+    "description": "16-inch laptop with Apple M1 chip and 16GB RAM.",
+    "stock": 34,
+    "category": "Laptop"
+  },
+  {
+    "name": "Dell XPS 13",
+    "description": "13.4-inch laptop with Intel i7 processor and 16GB RAM.",
+    "stock": 47,
+    "category": "Laptop"
+  },
+  {
+    "name": "HP Pavilion",
+    "description": "14-inch laptop with AMD Ryzen 5 processor and 8GB RAM.",
+    "stock": 60,
+    "category": "Laptop"
+  },
+  {
+    "name": "Lenovo ThinkPad X1",
+    "description": "14-inch laptop with Intel i5 processor and 16GB RAM.",
+    "stock": 25,
+    "category": "Laptop"
+  },
+  {
+    "name": "Samsung Galaxy S21",
+    "description": "5G smartphone with 128GB storage and 8GB RAM.",
+    "stock": 88,
+    "category": "Phone"
+  },
+  {
+    "name": "iPhone 13",
+    "description": "5G smartphone with 128GB storage and A15 Bionic chip.",
+    "stock": 72,
+    "category": "Phone"
+  },
+  {
+    "name": "OnePlus 9",
+    "description": "5G smartphone with 256GB storage and 12GB RAM.",
+    "stock": 39,
+    "category": "Phone"
+  },
+  {
+    "name": "Google Pixel 6",
+    "description": "5G smartphone with 128GB storage and 8GB RAM.",
+    "stock": 64,
+    "category": "Phone"
+  },
+  {
+    "name": "Sony Xperia 1 III",
+    "description": "5G smartphone with 256GB storage and 12GB RAM.",
+    "stock": 15,
+    "category": "Phone"
+  },
+  {
+    "name": "Samsung Refrigerator",
+    "description": "Double-door refrigerator with inverter compressor.",
+    "stock": 23,
+    "category": "Home Appliance"
+  },
+  {
+    "name": "LG Washing Machine",
+    "description": "Front-load washing machine with 6kg capacity.",
+    "stock": 78,
+    "category": "Home Appliance"
+  },
+  {
+    "name": "Philips Air Purifier",
+    "description": "HEPA air purifier for rooms up to 200 sq ft.",
+    "stock": 34,
+    "category": "Home Appliance"
+  },
+  {
+    "name": "Dyson Vacuum Cleaner",
+    "description": "Cordless vacuum cleaner with powerful suction.",
+    "stock": 57,
+    "category": "Home Appliance"
+  },
+  {
+    "name": "Whirlpool Microwave Oven",
+    "description": "Solo microwave oven with 20L capacity.",
+    "stock": 49,
+    "category": "Home Appliance"
+  },
+  {
+    "name": "Asus ROG Zephyrus",
+    "description": "15.6-inch gaming laptop with AMD Ryzen 9 processor and 16GB RAM.",
+    "stock": 11,
+    "category": "Laptop"
+  },
+  {
+    "name": "Motorola Edge",
+    "description": "5G smartphone with 128GB storage and 6GB RAM.",
+    "stock": 58,
+    "category": "Phone"
+  },
+  {
+    "name": "Bosch Dishwasher",
+    "description": "Freestanding dishwasher with 12 place settings.",
+    "stock": 42,
+    "category": "Home Appliance"
+  },
+  {
+    "name": "Huawei P40 Pro",
+    "description": "5G smartphone with 256GB storage and 8GB RAM.",
+    "stock": 21,
+    "category": "Phone"
+  },
+  {
+    "name": "Microsoft Surface Laptop 4",
+    "description": "15-inch laptop with Intel i5 processor and 8GB RAM.",
+    "stock": 66,
+    "category": "Laptop"
+  }
+]
