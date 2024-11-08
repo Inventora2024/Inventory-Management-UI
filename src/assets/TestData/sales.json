@@ -1,0 +1,72 @@
+[
+    {
+        "ProductName": "Acer Aspire 5",
+        "Qty": 12,
+        "OrderedDate": "2024-11-05"
+    },
+    {
+        "ProductName": "MacBook Pro",
+        "Qty": 8,
+        "OrderedDate": "2024-11-04"
+    },
+    {
+        "ProductName": "Dell XPS 13",
+        "Qty": 5,
+        "OrderedDate": "2024-11-06"
+    },
+    {
+        "ProductName": "HP Pavilion",
+        "Qty": 15,
+        "OrderedDate": "2024-11-03"
+    },
+    {
+        "ProductName": "Lenovo ThinkPad X1",
+        "Qty": 7,
+        "OrderedDate": "2024-11-05"
+    },
+    {
+        "ProductName": "Samsung Galaxy S21",
+        "Qty": 20,
+        "OrderedDate": "2024-11-02"
+    },
+    {
+        "ProductName": "iPhone 13",
+        "Qty": 10,
+        "OrderedDate": "2024-11-01"
+    },
+    {
+        "ProductName": "OnePlus 9",
+        "Qty": 6,
+        "OrderedDate": "2024-11-06"
+    },
+    {
+        "ProductName": "Google Pixel 6",
+        "Qty": 12,
+        "OrderedDate": "2024-11-05"
+    },
+    {
+        "ProductName": "Sony Xperia 1 III",
+        "Qty": 3,
+        "OrderedDate": "2024-11-02"
+    },
+    {
+        "ProductName": "Samsung Refrigerator",
+        "Qty": 4,
+        "OrderedDate": "2024-11-01"
+    },
+    {
+        "ProductName": "LG Washing Machine",
+        "Qty": 6,
+        "OrderedDate": "2024-11-03"
+    },
+    {
+        "ProductName": "Philips Air Purifier",
+        "Qty": 5,
+        "OrderedDate": "2024-11-06"
+    },
+    {
+        "ProductName": "Dyson Vacuum Cleaner",
+        "Qty": 8,
+        "OrderedDate": "2024-11-04"
+    }
+]
