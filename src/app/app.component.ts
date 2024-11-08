@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MainMenuComponent } from '../components/main-menu/main-menu.component';
 import { MainHeaderComponent } from '../components/main-header/main-header.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { LoginComponent } from '../components/login/login.component';
 
 @Component({
   selector: 'app-root',
@@ -14,9 +15,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     RouterOutlet,
     FormsModule,
     HttpClientModule,
+    FontAwesomeModule,
     MainMenuComponent,
     MainHeaderComponent,
-    FontAwesomeModule,
+    LoginComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',

@@ -1,0 +1,10 @@
+.card-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.form-group {
+  margin-bottom: 1.5rem; /* Add margin to create space between fields */
+}
