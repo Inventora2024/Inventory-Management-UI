@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Product } from '../../models/product.model';
 import { ProductsService } from '../../services/product-service/products.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
@@ -10,9 +9,11 @@ import {
   faSortUp,
   faSortDown,
   faFilter,
+  faTimes,
 } from '@fortawesome/free-solid-svg-icons';
+import { ProductWithCategory } from '../../models/product-with-category.model';
 
-type FilterField = 'name' | 'description' | 'stock' | 'category';
+type FilterField = 'productName' | 'category' | 'stockQuantity';
 
 @Component({
   selector: 'app-inventory',
@@ -23,38 +24,43 @@ type FilterField = 'name' | 'description' | 'stock' | 'category';
   styleUrls: ['./inventory.component.css'],
 })
 export class InventoryComponent implements OnInit {
-  products: Product[] = [];
-  filteredProducts: Product[] = [];
-  dropdownProducts: Product[] = []; // Secondary list for dropdown checkboxes
+  products: ProductWithCategory[] = [];
+  filteredProducts: ProductWithCategory[] = [];
+  dropdownProducts: ProductWithCategory[] = []; // Secondary list for dropdown checkboxes
   uniqueCategories: string[] = []; // Unique categories list
   filter = {
-    name: [] as string[],
-    description: [] as string[],
-    stock: { min: null, max: null },
+    productName: [] as string[],
+    stockQuantity: { min: null as number | null, max: null as number | null },
     category: [] as string[],
   };
+  selectedProductNames: { [key: string]: boolean } = {};
+  selectedCategories: { [key: string]: boolean } = {};
   sortOrder = 'asc';
   sortField: string | null = null;
   faSort = faSort;
   faSortUp = faSortUp;
   faSortDown = faSortDown;
   faFilter = faFilter;
+  faTimes = faTimes;
   showFilterDropdown: { [key in FilterField]: boolean } = {
-    name: false,
-    description: false,
-    stock: false,
+    productName: false,
+    stockQuantity: false,
     category: false,
   };
 
   constructor(private productsService: ProductsService) {}
 
   ngOnInit(): void {
-    this.productsService.getProducts().subscribe((data) => {
+    this.loadProducts();
+  }
+
+  loadProducts(): void {
+    this.productsService.getProductsWithCategory().subscribe((data) => {
       this.products = data;
       this.filteredProducts = data;
       this.dropdownProducts = data; // Initialize secondary list
       this.uniqueCategories = [
-        ...new Set(data.map((product) => product.category.toLowerCase())),
+        ...new Set(data.map((product) => product.category)),
       ]; // Get unique categories
     });
   }
@@ -62,26 +68,19 @@ export class InventoryComponent implements OnInit {
   applyFilter(): void {
     this.filteredProducts = this.products.filter((product) => {
       return (
-        (this.filter.name.length
-          ? this.filter.name.some((name) =>
-              product.name.toLowerCase().includes(name.toLowerCase())
+        (this.filter.productName.length
+          ? this.filter.productName.some((name) =>
+              product.productName.toLowerCase().includes(name.toLowerCase())
             )
           : true) &&
-        (this.filter.description.length
-          ? this.filter.description.some((desc) =>
-              product.description.toLowerCase().includes(desc.toLowerCase())
-            )
+        (this.filter.stockQuantity.min !== null
+          ? product.stockQuantity >= this.filter.stockQuantity.min
           : true) &&
-        (this.filter.stock.min !== null
-          ? product.stock >= this.filter.stock.min
-          : true) &&
-        (this.filter.stock.max !== null
-          ? product.stock <= this.filter.stock.max
+        (this.filter.stockQuantity.max !== null
+          ? product.stockQuantity <= this.filter.stockQuantity.max
           : true) &&
         (this.filter.category.length
-          ? this.filter.category.some((cat) =>
-              product.category.toLowerCase().includes(cat.toLowerCase())
-            )
+          ? this.filter.category.some((cat) => product.category.includes(cat))
           : true)
       );
     });
@@ -90,35 +89,32 @@ export class InventoryComponent implements OnInit {
     }
   }
 
-  onInputChange(
-    field: 'name' | 'description' | 'category',
-    event: Event
-  ): void {
+  onDropdownInputChange(field: 'productName' | 'category', event: Event): void {
     const input = event.target as HTMLInputElement;
-    if (field === 'category') {
-      this.uniqueCategories = [
-        ...new Set(
-          this.products
-            .filter((product) =>
-              product.category.toLowerCase().includes(input.value.toLowerCase())
-            )
-            .map((product) => product.category.toLowerCase())
-        ),
-      ];
+    this.dropdownProducts = this.products.filter((product) =>
+      product[field].toLowerCase().includes(input.value.toLowerCase())
+    ); // Update secondary list based on input
+  }
+
+  onStockInputChange(type: 'min' | 'max', event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const value = input.value ? parseInt(input.value, 10) : null;
+    if (type === 'min') {
+      this.filter.stockQuantity.min = value;
     } else {
-      this.dropdownProducts = this.products.filter((product) =>
-        product[field].toLowerCase().includes(input.value.toLowerCase())
-      ); // Update secondary list based on input
+      this.filter.stockQuantity.max = value;
     }
+    this.applyFilter();
   }
 
   onCheckboxChange(
-    field: 'name' | 'description' | 'category',
+    field: 'productName' | 'category',
     value: string,
     event: Event
   ): void {
     const checkbox = event.target as HTMLInputElement;
     const isChecked = checkbox.checked;
+
     if (isChecked) {
       (this.filter[field] as string[]).push(value);
     } else {
@@ -128,6 +124,47 @@ export class InventoryComponent implements OnInit {
       }
     }
     this.applyFilter();
+    this.updateDropdownLists();
+  }
+
+  clearFilters(field: 'productName' | 'category'): void {
+    this.filter[field] = [];
+    this.applyFilter();
+    if (field === 'productName') {
+      Object.keys(this.selectedProductNames).forEach(
+        (key) => (this.selectedProductNames[key] = false)
+      );
+    } else if (field === 'category') {
+      Object.keys(this.selectedCategories).forEach(
+        (key) => (this.selectedCategories[key] = false)
+      );
+    }
+    this.updateDropdownLists();
+  }
+
+  updateDropdownLists(): void {
+    if (this.filter.productName.length > 0) {
+      const filteredCategories = new Set(
+        this.products
+          .filter((product) =>
+            this.filter.productName.includes(product.productName)
+          )
+          .map((product) => product.category)
+      );
+      this.uniqueCategories = Array.from(filteredCategories);
+    } else {
+      this.uniqueCategories = [
+        ...new Set(this.products.map((product) => product.category)),
+      ];
+    }
+
+    if (this.filter.category.length > 0) {
+      this.dropdownProducts = this.products.filter((product) =>
+        this.filter.category.includes(product.category)
+      );
+    } else {
+      this.dropdownProducts = this.products;
+    }
   }
 
   sort(field: string): void {
@@ -138,8 +175,8 @@ export class InventoryComponent implements OnInit {
       this.sortField = field;
     }
     this.filteredProducts.sort((a, b) => {
-      const aField = a[field as keyof Product];
-      const bField = b[field as keyof Product];
+      const aField = a[field as keyof ProductWithCategory];
+      const bField = b[field as keyof ProductWithCategory];
       if (aField < bField) {
         return this.sortOrder === 'asc' ? -1 : 1;
       } else if (aField > bField) {

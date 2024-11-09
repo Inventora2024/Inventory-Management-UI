@@ -1,49 +1,72 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-4 mb-3" *ngFor="let product of products">
-      <div class="card" (click)="openModal(product)">
+    <div class="col-md-4 mb-3" *ngFor="let product of productsWithDetails">
+      <div class="card clickable-card" (click)="openModal(product)">
         <div class="row g-0">
-          <div class="col-md-4">
-            <img [src]="" class="img-fluid rounded-start" alt="..." />
+          <div class="col-md-4 d-flex align-items-center">
+            <img
+              [src]="product.image"
+              (error)="handleImageError($event)"
+              class="img-fluid rounded-start product-image"
+              alt="Product Image"
+            />
           </div>
           <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title line-clamp-1">{{ product.name }}</h5>
+            <div class="card-body uniform-card-body">
+              <h5 class="card-title line-clamp-1">{{ product.productName }}</h5>
               <p class="card-text line-clamp-2">{{ product.description }}</p>
-              <p class="card-text">{{ product.category }}</p>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- Modal -->
-  <div
-    class="modal fade"
-    id="productModal"
-    tabindex="-1"
-    aria-labelledby="productModalLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="productModalLabel">
-            {{ selectedProduct?.name }}
-          </h5>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div class="modal-body">
-          <img [src]="" class="img-fluid" alt="..." />
-          <p><strong>Description:</strong> {{ selectedProduct?.description }}</p>
-          <p><strong>Category:</strong> {{ selectedProduct?.category }}</p>
-          <p><strong>Stock:</strong> {{ selectedProduct?.stock }}</p>
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="productModal"
+  tabindex="-1"
+  aria-labelledby="productModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title modal-title-large" id="productModalLabel">
+          {{ selectedProduct?.productName }}
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-6 d-flex align-items-center">
+            <img
+              [src]="selectedProduct?.image"
+              (error)="handleImageError($event)"
+              class="img-fluid modal-product-image"
+              alt="Product Image"
+            />
+          </div>
+          <div class="col-md-6 modal-text-large">
+            <p>
+              <strong>Description:</strong> {{ selectedProduct?.description }}
+            </p>
+            <p><strong>Category:</strong> {{ selectedProduct?.category }}</p>
+            <p><strong>Nature:</strong> {{ selectedProduct?.nature }}</p>
+            <div><strong>Suppliers:</strong></div>
+            <ul>
+              <li *ngFor="let supplier of selectedProduct?.suppliers">
+                {{ supplier }}
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>

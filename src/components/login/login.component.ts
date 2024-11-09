@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Login } from '../../models/login';
+import { Login } from '../../models/login.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';

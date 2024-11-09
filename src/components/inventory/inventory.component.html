@@ -1,200 +1,152 @@
-<div class="table-container">
-  <table class="table table-bordered table-hover">
-    <thead class="thead-light">
+<div class="inventory-container">
+  <table class="table table-hover">
+    <thead class="thead-dark">
       <tr>
-        <th style="width: 25%">
-          <div class="d-flex justify-content-between align-items-center">
-            Name
-            <div class="d-flex align-items-center">
-              <fa-icon
-                [icon]="getSortIcon('name')"
-                class="sort-icon me-1"
-                (click)="sort('name')"
-              ></fa-icon>
-              <div class="dropdown">
+        <th>
+          <div class="header-content">
+            <span>Product Name</span>
+            <fa-icon
+              [icon]="getSortIcon('productName')"
+              (click)="sort('productName')"
+              class="me-2"
+            ></fa-icon>
+            <button
+              type="button"
+              class="btn btn-filter"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <fa-icon [icon]="faFilter"></fa-icon>
+            </button>
+            <ul class="dropdown-menu p-3 filter-dropdown">
+              <div class="d-flex align-items-center">
+                <input
+                  type="text"
+                  class="form-control mb-2"
+                  placeholder="Search..."
+                  (input)="onDropdownInputChange('productName', $event)"
+                />
                 <button
-                  class="btn"
                   type="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
+                  class="btn btn-link p-0 ms-2"
+                  (click)="clearFilters('productName')"
                 >
-                  <fa-icon [icon]="faFilter" class="filter-icon"></fa-icon>
+                  <fa-icon [icon]="faTimes"></fa-icon>
                 </button>
-                <ul class="dropdown-menu">
-                  <li>
-                    <input
-                      type="text"
-                      class="form-control"
-                      (input)="onInputChange('name', $event)"
-                      placeholder="Search Name"
-                    />
-                  </li>
-                  <li *ngFor="let product of dropdownProducts">
-                    <div class="form-check">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        [checked]="filter.name.includes(product.name)"
-                        (change)="
-                          onCheckboxChange('name', product.name, $event)
-                        "
-                      />
-                      <label class="form-check-label">{{ product.name }}</label>
-                    </div>
-                  </li>
-                </ul>
               </div>
-            </div>
+              <div *ngFor="let product of dropdownProducts">
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    [(ngModel)]="selectedProductNames[product.productName]"
+                    (change)="
+                      onCheckboxChange(
+                        'productName',
+                        product.productName,
+                        $event
+                      )
+                    "
+                  />
+                  <label class="form-check-label">{{
+                    product.productName
+                  }}</label>
+                </div>
+              </div>
+            </ul>
           </div>
         </th>
-        <th style="width: 45%">
-          <div class="d-flex justify-content-between align-items-center">
-            Description
-            <div class="d-flex align-items-center">
-              <fa-icon
-                [icon]="getSortIcon('description')"
-                class="sort-icon me-1"
-                (click)="sort('description')"
-              ></fa-icon>
-              <div class="dropdown">
+        <th>
+          <div class="header-content">
+            <span>Product Category</span>
+            <fa-icon
+              [icon]="getSortIcon('category')"
+              (click)="sort('category')"
+              class="me-2"
+            ></fa-icon>
+            <button
+              type="button"
+              class="btn btn-filter"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <fa-icon [icon]="faFilter"></fa-icon>
+            </button>
+            <ul class="dropdown-menu p-3 filter-dropdown">
+              <div class="d-flex align-items-center">
+                <input
+                  type="text"
+                  class="form-control mb-2"
+                  placeholder="Search..."
+                  (input)="onDropdownInputChange('category', $event)"
+                />
                 <button
-                  class="btn"
                   type="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
+                  class="btn btn-link p-0 ms-2"
+                  (click)="clearFilters('category')"
                 >
-                  <fa-icon [icon]="faFilter" class="filter-icon"></fa-icon>
+                  <fa-icon [icon]="faTimes"></fa-icon>
                 </button>
-                <ul class="dropdown-menu">
-                  <li>
-                    <input
-                      type="text"
-                      class="form-control"
-                      (input)="onInputChange('description', $event)"
-                      placeholder="Search Description"
-                    />
-                  </li>
-                  <li *ngFor="let product of dropdownProducts">
-                    <div class="form-check">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        [checked]="
-                          filter.description.includes(product.description)
-                        "
-                        (change)="
-                          onCheckboxChange(
-                            'description',
-                            product.description,
-                            $event
-                          )
-                        "
-                      />
-                      <label class="form-check-label">{{
-                        product.description
-                      }}</label>
-                    </div>
-                  </li>
-                </ul>
               </div>
-            </div>
+              <div *ngFor="let category of uniqueCategories">
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    [(ngModel)]="selectedCategories[category]"
+                    (change)="onCheckboxChange('category', category, $event)"
+                  />
+                  <label class="form-check-label">{{ category }}</label>
+                </div>
+              </div>
+            </ul>
           </div>
         </th>
-        <th style="width: 10%">
-          <div class="d-flex justify-content-between align-items-center">
-            Stock
-            <div class="d-flex align-items-center">
-              <fa-icon
-                [icon]="getSortIcon('stock')"
-                class="sort-icon me-1"
-                (click)="sort('stock')"
-              ></fa-icon>
-              <div class="dropdown">
-                <button
-                  class="btn"
-                  type="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  <fa-icon [icon]="faFilter" class="filter-icon"></fa-icon>
-                </button>
-                <ul class="dropdown-menu">
-                  <li>
-                    <input
-                      type="number"
-                      class="form-control"
-                      [(ngModel)]="filter.stock.min"
-                      (input)="applyFilter()"
-                      placeholder="Min Stock"
-                    />
-                  </li>
-                  <li>
-                    <input
-                      type="number"
-                      class="form-control"
-                      [(ngModel)]="filter.stock.max"
-                      (input)="applyFilter()"
-                      placeholder="Max Stock"
-                    />
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </th>
-        <th style="width: 20%">
-          <div class="d-flex justify-content-between align-items-center">
-            Category
-            <div class="d-flex align-items-center">
-              <fa-icon
-                [icon]="getSortIcon('category')"
-                class="sort-icon me-1"
-                (click)="sort('category')"
-              ></fa-icon>
-              <div class="dropdown">
-                <button
-                  class="btn"
-                  type="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  <fa-icon [icon]="faFilter" class="filter-icon"></fa-icon>
-                </button>
-                <ul class="dropdown-menu">
-                  <li>
-                    <input
-                      type="text"
-                      class="form-control"
-                      (input)="onInputChange('category', $event)"
-                      placeholder="Search Category"
-                    />
-                  </li>
-                  <li *ngFor="let category of uniqueCategories">
-                    <div class="form-check">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        [checked]="filter.category.includes(category)"
-                        (change)="
-                          onCheckboxChange('category', category, $event)
-                        "
-                      />
-                      <label class="form-check-label">{{ category }}</label>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
+        <th>
+          <div class="header-content">
+            <span>Stock</span>
+            <fa-icon
+              [icon]="getSortIcon('stockQuantity')"
+              (click)="sort('stockQuantity')"
+              class="me-2"
+            ></fa-icon>
+            <button
+              type="button"
+              class="btn btn-filter"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <fa-icon [icon]="faFilter"></fa-icon>
+            </button>
+            <ul class="dropdown-menu p-3 filter-dropdown">
+              <label>
+                Min:
+                <input
+                  type="number"
+                  class="form-control mb-2"
+                  placeholder="Min"
+                  (input)="onStockInputChange('min', $event)"
+                />
+              </label>
+              <label>
+                Max:
+                <input
+                  type="number"
+                  class="form-control mb-2"
+                  placeholder="Max"
+                  (input)="onStockInputChange('max', $event)"
+                />
+              </label>
+            </ul>
           </div>
         </th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let product of filteredProducts">
-        <td class="product-name">{{ product.name }}</td>
-        <td class="product-description">{{ product.description }}</td>
-        <td class="product-stock">{{ product.stock }}</td>
-        <td class="product-category">{{ product.category }}</td>
+        <td>{{ product.productName }}</td>
+        <td>{{ product.category }}</td>
+        <td>{{ product.stockQuantity }}</td>
       </tr>
     </tbody>
   </table>
