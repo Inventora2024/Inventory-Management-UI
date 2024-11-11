@@ -1,1 +1,153 @@
-<p>suppliers works!</p>
+<div class="container mt-3">
+  <h3 class="mb-4">Suppliers</h3>
+  <div class="table-responsive">
+    <table class="table table-hover table-bordered table-striped align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col" class="col-2">Company</th>
+          <th scope="col" class="col-3">Description</th>
+          <th scope="col" class="col-3">Address</th>
+          <th scope="col" class="col-2">SPOC Email</th>
+          <th scope="col" class="col-2">SPOC Contact</th>
+          <th scope="col" class="col-2 text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let supplier of suppliers">
+          <td>{{ supplier.company }}</td>
+          <td>{{ supplier.description }}</td>
+          <td>{{ supplier.address }}</td>
+          <td>{{ supplier.spocEmail }}</td>
+          <td>{{ supplier.spocContact }}</td>
+          <td class="text-center">
+            <button
+              class="btn btn-primary btn-sm"
+              (click)="openModal(editModal, supplier)"
+            >
+              <fa-icon [icon]="['fas', 'edit']"></fa-icon>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Edit Supplier Modal -->
+  <ng-template #editModal let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title">Edit Supplier</h5>
+      <button
+        type="button"
+        class="btn-close"
+        aria-label="Close"
+        (click)="modal.dismiss('Cross click')"
+      ></button>
+    </div>
+    <div class="modal-body">
+      <form (ngSubmit)="onSubmit(modal)" [formGroup]="supplierForm">
+        <div class="mb-3">
+          <label for="company" class="form-label">Company</label>
+          <input
+            type="text"
+            class="form-control"
+            id="company"
+            formControlName="company"
+            required
+          />
+          <div
+            *ngIf="
+              supplierForm.get('company')?.invalid &&
+              supplierForm.get('company')?.touched
+            "
+            class="text-danger"
+          >
+            Company is required.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea
+            class="form-control"
+            id="description"
+            rows="3"
+            formControlName="description"
+            required
+          ></textarea>
+          <div
+            *ngIf="
+              supplierForm.get('description')?.invalid &&
+              supplierForm.get('description')?.touched
+            "
+            class="text-danger"
+          >
+            Description is required.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="address" class="form-label">Address</label>
+          <textarea
+            class="form-control"
+            id="address"
+            rows="3"
+            formControlName="address"
+            required
+          ></textarea>
+          <div
+            *ngIf="
+              supplierForm.get('address')?.invalid &&
+              supplierForm.get('address')?.touched
+            "
+            class="text-danger"
+          >
+            Address is required.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="spocEmail" class="form-label">SPOC Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="spocEmail"
+            formControlName="spocEmail"
+            required
+          />
+          <div
+            *ngIf="
+              supplierForm.get('spocEmail')?.invalid &&
+              supplierForm.get('spocEmail')?.touched
+            "
+            class="text-danger"
+          >
+            Valid email is required.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="spocContact" class="form-label">SPOC Contact</label>
+          <input
+            type="text"
+            class="form-control"
+            id="spocContact"
+            formControlName="spocContact"
+            required
+          />
+          <div
+            *ngIf="
+              supplierForm.get('spocContact')?.invalid &&
+              supplierForm.get('spocContact')?.touched
+            "
+            class="text-danger"
+          >
+            SPOC Contact is required or invalid.
+          </div>
+        </div>
+        <button
+          type="submit"
+          class="btn btn-success"
+          [disabled]="supplierForm.invalid"
+        >
+          Save changes
+        </button>
+      </form>
+    </div>
+  </ng-template>
+</div>

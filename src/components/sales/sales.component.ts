@@ -1,35 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { SalesInfoService } from '../../services/product-service/sales-info.service';
-import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
-import { Sales } from '../../models/sales.model';
-import { NgxPaginationModule } from 'ngx-pagination';
-
+import { Component } from '@angular/core';
+import { DisplaySaleComponent } from "./display-sale/display-sale.component";
+import { CreateSaleComponent } from "./create-sale/create-sale.component";
 
 @Component({
   selector: 'app-sales',
   standalone: true,
-  imports: [CommonModule,
-  HttpClientModule,
-NgxPaginationModule],
-  providers: [SalesInfoService],
+  imports: [DisplaySaleComponent, CreateSaleComponent],
   templateUrl: './sales.component.html',
   styleUrl: './sales.component.css'
 })
-export class SalesComponent implements OnInit {
-  
-  sales: Sales[]=[];
-  p : any;
-
-  constructor(private salesInfoService: SalesInfoService){}
-
-  ngOnInit(): void{
-    this.salesInfoService.getSalesList().subscribe((data : Sales[])=>{
-      this.sales = data;
-      console.log(this.sales);
-    });
-    
-    
-  }
+export class SalesComponent {
 
 }

@@ -1,0 +1,71 @@
+<div class="container mt-3">
+  <h3>Sales</h3>
+  <table class="table table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col" class="col-3">Sale Id</th>
+        <th scope="col" class="col-9">Sale Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let sale of sales"
+        (click)="openModal(sale)"
+        style="cursor: pointer"
+      >
+        <td class="col-3">{{ sale.customerOrderId }}</td>
+        <td class="col-9">{{ sale.orderDate | date : "medium" }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="saleModal"
+    tabindex="-1"
+    aria-labelledby="saleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="saleModalLabel">Sale Details</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div class="d-flex justify-content-between">
+            <p><strong>Sale Id:</strong> {{ selectedSale?.customerOrderId }}</p>
+            <p>
+              <strong>Sale Date:</strong>
+              {{ selectedSale?.orderDate | date : "medium" }}
+            </p>
+          </div>
+          <hr />
+          <h5>Products</h5>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col" class="col-3">Product Id</th>
+                <th scope="col" class="col-6">Product Name</th>
+                <th scope="col" class="col-3">Product Quantity</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let product of selectedSale?.customerOrderItems">
+                <td class="col-3">{{ product.productId }}</td>
+                <td class="col-6">{{ product.productName }}</td>
+                <td class="col-3">{{ product.quantity }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

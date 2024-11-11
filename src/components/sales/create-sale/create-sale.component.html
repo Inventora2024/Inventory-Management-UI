@@ -1,0 +1,96 @@
+<div class="container mt-3">
+  <h3>Create Sale</h3>
+
+  <!-- Success Alert -->
+  <div
+    *ngIf="submissionSuccess"
+    class="alert alert-success alert-dismissible fade show"
+    role="alert"
+  >
+    Sale successfully submitted!
+    <button
+      type="button"
+      class="btn-close"
+      (click)="closeAlert()"
+      aria-label="Close"
+    ></button>
+  </div>
+
+  <!-- Error Alert -->
+  <div
+    *ngIf="submissionError"
+    class="alert alert-danger alert-dismissible fade show"
+    role="alert"
+  >
+    Error submitting sale. Please try again.
+    <button
+      type="button"
+      class="btn-close"
+      (click)="closeAlert()"
+      aria-label="Close"
+    ></button>
+  </div>
+
+  <form #saleForm="ngForm" (ngSubmit)="onSubmit(saleForm)" novalidate>
+    <div *ngFor="let item of saleItems; let i = index" class="row mb-3">
+      <div class="col-md-6">
+        <label for="productName{{ i }}" class="form-label">Product Name</label>
+        <select
+          id="productName{{ i }}"
+          class="form-select"
+          [(ngModel)]="item.productId"
+          name="productName{{ i }}"
+          required
+          (change)="onProductChange(i)"
+        >
+          <option *ngFor="let product of products" [value]="product.productId">
+            {{ product.productName }}
+          </option>
+        </select>
+        <div *ngIf="saleForm.submitted && !item.productId" class="text-danger">
+          Product name is required.
+        </div>
+      </div>
+
+      <div class="col-md-5">
+        <label for="quantity{{ i }}" class="form-label">Quantity</label>
+        <input
+          type="number"
+          id="quantity{{ i }}"
+          class="form-control"
+          [(ngModel)]="item.quantity"
+          name="quantity{{ i }}"
+          required
+          min="1"
+          (change)="onQuantityChange(i, $event)"
+        />
+        <div
+          *ngIf="saleForm.submitted && (!item.quantity || item.quantity < 1)"
+          class="text-danger"
+        >
+          Quantity must be greater than 0.
+        </div>
+      </div>
+
+      <div class="col-md-1 d-flex align-items-end">
+        <button type="button" class="btn btn-danger" (click)="removeItem(i)">
+          <fa-icon [icon]="faTimes"></fa-icon>
+        </button>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-12">
+        <button type="button" class="btn btn-success" (click)="addItem()">
+          <fa-icon [icon]="faPlus"></fa-icon> Add Product
+        </button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary">Submit Sale</button>
+      </div>
+    </div>
+  </form>
+</div>
