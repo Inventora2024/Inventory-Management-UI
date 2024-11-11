@@ -30,4 +30,9 @@ export class ProductsService {
       this.productWithDetailsUrl
     );
   }
+
+  updateProduct(product: Product): Observable<void> {
+    const url = `${this.productUrl}/${product.productId}`;
+    return this.http.put<void>(url, product);
+  }
 }

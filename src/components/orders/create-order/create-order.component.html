@@ -1,1 +1,114 @@
-<p>create-order works!</p>
+<div class="container mt-3">
+  <h3>Create Order</h3>
+
+  <!-- Success Alert -->
+  <div
+    *ngIf="submissionSuccess"
+    class="alert alert-success alert-dismissible fade show"
+    role="alert"
+  >
+    Order successfully submitted!
+    <button
+      type="button"
+      class="btn-close"
+      (click)="closeAlert()"
+      aria-label="Close"
+    ></button>
+  </div>
+
+  <!-- Error Alert -->
+  <div
+    *ngIf="submissionError"
+    class="alert alert-danger alert-dismissible fade show"
+    role="alert"
+  >
+    Error submitting order. Please try again.
+    <button
+      type="button"
+      class="btn-close"
+      (click)="closeAlert()"
+      aria-label="Close"
+    ></button>
+  </div>
+
+  <form #orderForm="ngForm" (ngSubmit)="onSubmit(orderForm)" novalidate>
+    <div *ngFor="let item of orderItems; let i = index" class="row mb-3">
+      <div class="col-md-4">
+        <label for="productName{{ i }}" class="form-label">Product Name</label>
+        <select
+          id="productName{{ i }}"
+          class="form-select"
+          [(ngModel)]="item.productId"
+          name="productName{{ i }}"
+          required
+          (change)="onProductChange(i)"
+        >
+          <option *ngFor="let product of products" [value]="product.productId">
+            {{ product.productName }}
+          </option>
+        </select>
+        <div *ngIf="orderForm.submitted && !item.productId" class="text-danger">
+          Product name is required.
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <label for="quantity{{ i }}" class="form-label">Quantity</label>
+        <input
+          type="number"
+          id="quantity{{ i }}"
+          class="form-control"
+          [(ngModel)]="item.quantity"
+          name="quantity{{ i }}"
+          required
+          min="1"
+          (change)="onQuantityChange(i, $event)"
+        />
+        <div
+          *ngIf="orderForm.submitted && (!item.quantity || item.quantity < 1)"
+          class="text-danger"
+        >
+          Quantity must be greater than 0.
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <label for="supplier{{ i }}" class="form-label">Supplier</label>
+        <select
+          id="supplier{{ i }}"
+          class="form-select"
+          [(ngModel)]="item.supplier"
+          name="supplier{{ i }}"
+          required
+        >
+          <option *ngFor="let supplier of item.suppliers" [value]="supplier">
+            {{ supplier }}
+          </option>
+        </select>
+        <div *ngIf="orderForm.submitted && !item.supplier" class="text-danger">
+          Supplier is required.
+        </div>
+      </div>
+
+      <div class="col-md-1 d-flex align-items-end">
+        <button type="button" class="btn btn-danger" (click)="removeItem(i)">
+          <fa-icon [icon]="faTimes"></fa-icon>
+        </button>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-12">
+        <button type="button" class="btn btn-success" (click)="addItem()">
+          <fa-icon [icon]="faPlus"></fa-icon> Add Product
+        </button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary">Submit Order</button>
+      </div>
+    </div>
+  </form>
+</div>

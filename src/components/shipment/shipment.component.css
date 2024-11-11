@@ -1,0 +1,37 @@
+.btn-filter {
+  color: black;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+}
+
+.btn-filter:hover,
+.btn-filter:focus {
+  color: black;
+  background: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.sortable-header {
+  display: flex;
+  align-items: center;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Adjust the gap as needed */
+}
+
+.filter-dropdown {
+  width: 300px;
+  background: rgba(138, 43, 226, 0.15); /* Much lighter and more transparent */
+  backdrop-filter: blur(10px); /* Blur effect */
+  border: 1px solid rgba(138, 43, 226, 0.2); /* Light border matching the background */
+  border-radius: 8px; /* Soft edges */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds the 3D effect */
+  padding: 10px;
+}

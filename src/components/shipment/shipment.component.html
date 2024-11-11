@@ -1,1 +1,125 @@
-<p>shipment works! From CG laptop!!</p>
+<div class="shipment-container">
+  <table class="table table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th>
+          <div class="header-content">
+            <span>Order Id</span>
+            <fa-icon
+              [icon]="getSortIcon('orderId')"
+              (click)="sortBy('orderId')"
+              class="me-2"
+            ></fa-icon>
+          </div>
+        </th>
+        <th>
+          <div class="header-content">
+            <span>Order Date</span>
+            <fa-icon
+              [icon]="getSortIcon('orderDate')"
+              (click)="sortBy('orderDate')"
+              class="me-2"
+            ></fa-icon>
+          </div>
+        </th>
+        <th>
+          <div class="header-content">
+            <span>Status</span>
+            <fa-icon
+              [icon]="getSortIcon('status')"
+              (click)="sortBy('status')"
+              class="me-2"
+            ></fa-icon>
+          </div>
+        </th>
+        <th>
+          <div class="header-content">
+            <span>Last Updated</span>
+            <fa-icon
+              [icon]="getSortIcon('lastUpdated')"
+              (click)="sortBy('lastUpdated')"
+              class="me-2"
+            ></fa-icon>
+          </div>
+        </th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let shipment of filteredShipments">
+        <td (click)="openModal(shipment.orderId)">
+          {{ shipment.orderId }}
+        </td>
+        <td (click)="openModal(shipment.orderId)">
+          {{ shipment.orderDate | date }}
+        </td>
+        <td>
+          <select [(ngModel)]="shipment.status" class="form-select">
+            <option value="Order Confirmed">Order Confirmed</option>
+            <option value="Shipped">Shipped</option>
+            <option value="Out for delivery">Out for delivery</option>
+            <option value="Delivered">Delivered</option>
+          </select>
+        </td>
+        <td>
+          {{ shipment.lastUpdated | date : "short" }}
+        </td>
+        <td>
+          <button class="btn btn-success" (click)="saveShipment(shipment)">
+            <fa-icon [icon]="faSave"></fa-icon> Save
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Modal for displaying order details -->
+  <div
+    class="modal fade"
+    id="orderModal"
+    tabindex="-1"
+    aria-labelledby="orderModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="orderModalLabel">Order Details</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div class="d-flex justify-content-between">
+            <p><strong>Order Id:</strong> {{ selectedOrder?.stockOrderId }}</p>
+            <p>
+              <strong>Order Date:</strong>
+              {{ selectedOrder?.orderDate | date : "medium" }}
+            </p>
+          </div>
+          <hr />
+          <h5>Products</h5>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col" class="col-3">Product Id</th>
+                <th scope="col" class="col-6">Product Name</th>
+                <th scope="col" class="col-3">Product Quantity</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let product of selectedOrder?.stockOrderItems">
+                <td class="col-3">{{ product.productId }}</td>
+                <td class="col-6">{{ product.productName }}</td>
+                <td class="col-3">{{ product.quantity }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
