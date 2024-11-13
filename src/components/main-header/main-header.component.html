@@ -20,7 +20,11 @@
       </li>
       <li><hr class="dropdown-divider" /></li>
       <li>
-        <button class="dropdown-item" type="button">
+        <button
+          class="dropdown-item"
+          type="button"
+          (click)="openProfileModal()"
+        >
           <fa-icon [icon]="faIdCard" class="profile-menu-icon"></fa-icon>
           &nbsp;Profile
         </button>
@@ -36,15 +40,4 @@
       </li>
     </ul>
   </div>
-
-  <!-- <div class="titlebar-right" *ngIf="!this.isLoggedIn">
-          <button id="home-login-button" type="button" class="login-signup-buttons" routerLink="/login">Login</button>
-          <button id="home-signup-button" type="button" class="login-signup-buttons" routerLink="/signup">SignUp</button>
-        </div>
-        <div class="titlebar-right" *ngIf="this.isLoggedIn">
-          <span class="welcome-text">Welcome, {{this.name}}</span>
-          <button *ngIf="this.role == 'Customer'" id="home-orders-button" type="button" class="login-signup-buttons"
-            routerLink="/customers-order">Orders</button>
-          <button id="home-logout-button" type="button" class="login-signup-buttons" routerLink="/login">Logout</button>
-        </div> -->
 </div>

@@ -1,0 +1,123 @@
+<div class="modal-header">
+  <h5 class="modal-title">Update Profile</h5>
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="activeModal.dismiss()"
+  ></button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="userId" class="form-label">User ID</label>
+          <input
+            type="text"
+            class="form-control"
+            id="userId"
+            formControlName="userId"
+            readonly
+          />
+        </div>
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            formControlName="name"
+            readonly
+          />
+        </div>
+        <div class="mb-3">
+          <label for="role" class="form-label">Role</label>
+          <input
+            type="text"
+            class="form-control"
+            id="role"
+            formControlName="role"
+            readonly
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            formControlName="email"
+          />
+          <div
+            *ngIf="
+              userForm.get('email')?.invalid && userForm.get('email')?.touched
+            "
+            class="text-danger"
+          >
+            Valid email is required.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input
+            [type]="passwordFieldType"
+            class="form-control"
+            id="password"
+            formControlName="password"
+          />
+          <div
+            *ngIf="
+              userForm.get('password')?.invalid &&
+              userForm.get('password')?.touched
+            "
+            class="text-danger"
+          >
+            Password must be 8-15 characters with at least one lowercase, one
+            uppercase letter, and one special character.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="contact" class="form-label">Contact</label>
+          <input
+            type="text"
+            class="form-control"
+            id="contact"
+            formControlName="contact"
+          />
+          <div
+            *ngIf="
+              userForm.get('contact')?.invalid &&
+              userForm.get('contact')?.touched
+            "
+            class="text-danger"
+          >
+            Contact must be a 10-digit number starting with 6-9.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="address" class="form-label">Address</label>
+      <textarea
+        class="form-control"
+        id="address"
+        rows="3"
+        formControlName="address"
+      ></textarea>
+      <div
+        *ngIf="
+          userForm.get('address')?.invalid && userForm.get('address')?.touched
+        "
+        class="text-danger"
+      >
+        Address is required.
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid">
+      Save changes
+    </button>
+  </form>
+</div>
