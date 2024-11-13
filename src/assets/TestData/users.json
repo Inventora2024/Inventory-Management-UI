@@ -1,0 +1,183 @@
+[
+    {
+      "UserId": 1,
+      "Name": "John Doe",
+      "Email": "johndoe@email.com",
+      "Password": "johndoe1234",
+      "Contact": "+1-555-1234",
+      "Address": "123 Elm Street, Springfield, IL",
+      "Role": "Admin"
+    },
+    {
+      "UserId": 2,
+      "Name": "Jane Smith",
+      "Email": "janesmith@email.com",
+      "Password": "janesmith2024",
+      "Contact": "+1-555-5678",
+      "Address": "456 Oak Avenue, Springfield, IL",
+      "Role": "User"
+    },
+    {
+      "UserId": 3,
+      "Name": "Michael Johnson",
+      "Email": "michael.johnson@email.com",
+      "Password": "michael1234",
+      "Contact": "+1-555-8765",
+      "Address": "789 Pine Road, Springfield, IL",
+      "Role": "Moderator"
+    },
+    {
+      "UserId": 4,
+      "Name": "Emily Davis",
+      "Email": "emily.davis@email.com",
+      "Password": "emilydavis5678",
+      "Contact": "+1-555-2345",
+      "Address": "101 Maple Blvd, Springfield, IL",
+      "Role": "User"
+    },
+    {
+      "UserId": 5,
+      "Name": "Chris Brown",
+      "Email": "chrisbrown@email.com",
+      "Password": "chrisbrown2024",
+      "Contact": "+1-555-3456",
+      "Address": "202 Birch Street, Springfield, IL",
+      "Role": "Admin"
+    },
+    {
+      "UserId": 6,
+      "Name": "Sarah Wilson",
+      "Email": "sarah.wilson@email.com",
+      "Password": "sarah2024",
+      "Contact": "+1-555-4567",
+      "Address": "303 Cedar Lane, Springfield, IL",
+      "Role": "User"
+    },
+    {
+      "UserId": 7,
+      "Name": "David Martinez",
+      "Email": "david.martinez@email.com",
+      "Password": "davidmartinez123",
+      "Contact": "+1-555-6543",
+      "Address": "404 Cherry Street, Springfield, IL",
+      "Role": "Moderator"
+    },
+    {
+      "UserId": 8,
+      "Name": "Olivia Taylor",
+      "Email": "olivia.taylor@email.com",
+      "Password": "oliviataylor123",
+      "Contact": "+1-555-7654",
+      "Address": "505 Walnut Road, Springfield, IL",
+      "Role": "User"
+    },
+    {
+      "UserId": 9,
+      "Name": "James Anderson",
+      "Email": "james.anderson@email.com",
+      "Password": "james2024",
+      "Contact": "+1-555-8764",
+      "Address": "606 Pinehill Blvd, Springfield, IL",
+      "Role": "Admin"
+    },
+    {
+      "UserId": 10,
+      "Name": "Megan Thomas",
+      "Email": "megan.thomas@email.com",
+      "Password": "meganthomas6789",
+      "Contact": "+1-555-2346",
+      "Address": "707 Oakwood Lane, Springfield, IL",
+      "Role": "User"
+    },
+    {
+      "UserId": 11,
+      "Name": "William Lee",
+      "Email": "william.lee@email.com",
+      "Password": "williamlee1234",
+      "Contact": "+1-555-8761",
+      "Address": "808 Silver Street, Springfield, IL",
+      "Role": "Moderator"
+    },
+    {
+      "UserId": 12,
+      "Name": "Sophia Harris",
+      "Email": "sophia.harris@email.com",
+      "Password": "sophiaharris5678",
+      "Contact": "+1-555-9876",
+      "Address": "909 Oakridge Road, Springfield, IL",
+      "Role": "User"
+    },
+    {
+      "UserId": 13,
+      "Name": "Benjamin Clark",
+      "Email": "benjamin.clark@email.com",
+      "Password": "benjamin1234",
+      "Contact": "+1-555-8760",
+      "Address": "1010 Sycamore Blvd, Springfield, IL",
+      "Role": "Admin"
+    },
+    {
+      "UserId": 14,
+      "Name": "Charlotte Lewis",
+      "Email": "charlotte.lewis@email.com",
+      "Password": "charlotte2024",
+      "Contact": "+1-555-6542",
+      "Address": "1111 Cedarwood Lane, Springfield, IL",
+      "Role": "User"
+    },
+    {
+      "UserId": 15,
+      "Name": "Alexander Walker",
+      "Email": "alexander.walker@email.com",
+      "Password": "alexanderwalk123",
+      "Contact": "+1-555-7652",
+      "Address": "1212 Birchwood Blvd, Springfield, IL",
+      "Role": "Moderator"
+    },
+    {
+      "UserId": 16,
+      "Name": "Isabella Young",
+      "Email": "isabella.young@email.com",
+      "Password": "isabellayoung2024",
+      "Contact": "+1-555-4321",
+      "Address": "1313 Pinecrest Road, Springfield, IL",
+      "Role": "User"
+    },
+    {
+      "UserId": 17,
+      "Name": "Lucas Scott",
+      "Email": "lucas.scott@email.com",
+      "Password": "lucasscott2024",
+      "Contact": "+1-555-3210",
+      "Address": "1414 Oak Grove Avenue, Springfield, IL",
+      "Role": "User"
+    },
+    {
+      "UserId": 18,
+      "Name": "Amelia Allen",
+      "Email": "amelia.allen@email.com",
+      "Password": "ameliaallen1234",
+      "Contact": "+1-555-2109",
+      "Address": "1515 Maplewood Lane, Springfield, IL",
+      "Role": "Admin"
+    },
+    {
+      "UserId": 19,
+      "Name": "Jack King",
+      "Email": "jack.king@email.com",
+      "Password": "jackking5678",
+      "Contact": "+1-555-5432",
+      "Address": "1616 Willow Way, Springfield, IL",
+      "Role": "Moderator"
+    },
+    {
+      "UserId": 20,
+      "Name": "Lily Wright",
+      "Email": "lily.wright@email.com",
+      "Password": "lilywright2024",
+      "Contact": "+1-555-6541",
+      "Address": "1717 Ash Lane, Springfield, IL",
+      "Role": "User"
+    }
+  ]
+  
