@@ -15,7 +15,7 @@
     <ul class="dropdown-menu dropdown-menu-end">
       <li>
         <button class="dropdown-item profile-greeting" type="button" disabled>
-          Hello, John!
+          Hello, {{ username }}!
         </button>
       </li>
       <li><hr class="dropdown-divider" /></li>
@@ -30,7 +30,7 @@
         </button>
       </li>
       <li>
-        <button class="dropdown-item" type="button">
+        <button class="dropdown-item" type="button" (click)="signOut()">
           <fa-icon
             [icon]="faRightFromBracket"
             class="profile-menu-icon"

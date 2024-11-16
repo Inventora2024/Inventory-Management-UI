@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Product } from '../../models/product.model';
 import { ProductWithCategory } from '../../models/product-with-category.model';
@@ -17,22 +17,42 @@ export class ProductsService {
 
   constructor(private http: HttpClient) {}
 
+  private getToken(): string | null {
+    return localStorage.getItem('token');
+  }
+
+  private createHeaders(): HttpHeaders {
+    const token = this.getToken();
+    let headers = new HttpHeaders();
+    if (token) {
+      headers = headers.set('Authorization', `Bearer ${token}`);
+    }
+    return headers;
+  }
+
   getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.productUrl);
+    const headers = this.createHeaders();
+    return this.http.get<Product[]>(this.productUrl, { headers });
   }
 
   getProductsWithCategory(): Observable<ProductWithCategory[]> {
-    return this.http.get<ProductWithCategory[]>(this.productWithCategoryUrl);
+    const headers = this.createHeaders();
+    return this.http.get<ProductWithCategory[]>(this.productWithCategoryUrl, {
+      headers,
+    });
   }
 
   getProductsWithDetails(): Observable<ProductCategorySupplierDetails[]> {
+    const headers = this.createHeaders();
     return this.http.get<ProductCategorySupplierDetails[]>(
-      this.productWithDetailsUrl
+      this.productWithDetailsUrl,
+      { headers }
     );
   }
 
   updateProduct(product: Product): Observable<void> {
+    const headers = this.createHeaders();
     const url = `${this.productUrl}/${product.productId}`;
-    return this.http.put<void>(url, product);
+    return this.http.put<void>(url, product, { headers });
   }
 }

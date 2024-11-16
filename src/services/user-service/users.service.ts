@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { User } from '../../models/user.model';
+import { User, UserSafeData } from '../../models/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -11,19 +11,42 @@ export class UsersService {
 
   constructor(private http: HttpClient) {}
 
+  private getToken(): string | null {
+    return localStorage.getItem('token');
+  }
+
+  private createHeaders(): HttpHeaders {
+    const token = this.getToken();
+    let headers = new HttpHeaders();
+    if (token) {
+      headers = headers.set('Authorization', `Bearer ${token}`);
+    }
+    return headers;
+  }
+
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.apiUrl);
+    const headers = this.createHeaders();
+    return this.http.get<User[]>(this.apiUrl, { headers });
   }
 
   getUserById(userId: number): Observable<User> {
-    return this.http.get<User>(`${this.apiUrl}/${userId}`);
+    const headers = this.createHeaders();
+    return this.http.get<User>(`${this.apiUrl}/${userId}`, { headers });
   }
 
   createUser(user: User): Observable<User> {
-    return this.http.post<User>(this.apiUrl, user);
+    const headers = this.createHeaders();
+    return this.http.post<User>(this.apiUrl, user, { headers });
   }
 
   updateUser(userId: number, user: User): Observable<User> {
-    return this.http.put<User>(`${this.apiUrl}/${userId}`, user);
+    const headers = this.createHeaders();
+    return this.http.put<User>(`${this.apiUrl}/${userId}`, user, { headers });
+  }
+
+  // New method to get users with limited fields
+  getUsersDisplay(): Observable<UserSafeData[]> {
+    const headers = this.createHeaders();
+    return this.http.get<UserSafeData[]>(`${this.apiUrl}/display`, { headers });
   }
 }

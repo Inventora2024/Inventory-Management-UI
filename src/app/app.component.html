@@ -1,14 +1,20 @@
 <div class="container-fluid my-layout">
-  <!-- <app-login /> -->
-  <div class="header-container">
-    <app-main-header />
-  </div>
-  <div class="main-menu-container">
-    <app-main-menu />
-  </div>
-  <div class="main-content-container">
-    <div class="main-content-area">
-      <router-outlet name="main-content"></router-outlet>
+  <app-login
+    *ngIf="!isAuthenticated"
+    (loginSuccess)="onLoginSuccess()"
+    class="login-container"
+  ></app-login>
+  <div *ngIf="isAuthenticated" class="authenticated-container">
+    <div class="header-container">
+      <app-main-header (userSignedOut)="onLogout()"></app-main-header>
+    </div>
+    <div class="main-menu-container">
+      <app-main-menu></app-main-menu>
+    </div>
+    <div class="main-content-container">
+      <div class="main-content-area">
+        <router-outlet name="main-content"></router-outlet>
+      </div>
     </div>
   </div>
 </div>

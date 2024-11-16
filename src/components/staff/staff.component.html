@@ -1,60 +1,98 @@
-<!-- Button to open the staff modal -->
-<!--<button (click)="adduserModal.openModal()" class="btn btn-success">Create New Staff</button>-->
-
-<!-- Modal Component -->
-<!--<staff-add-user #adduserModal (formSubmitted)="handleFormSubmit($event)"></staff-add-user>-->
-
-<div class="container">
-    <div class="row">
-      <div class="col-md-4 mb-3" *ngFor="let user of users">
-        <div class="card" (click)="openModal(user)">
-          <div class="row g-0">
-            <div class="col-md-4">
-              <img [src]="" class="img-fluid rounded-start" alt="..." />
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 class="card-title line-clamp-1">{{ user.Name }}</h5>
-                <p class="card-text line-clamp-2">{{ user.Email }}</p>
-                <p class="card-text">{{ user.Role }}</p>
-              </div>
-            </div>
-          </div>
+<div class="container mt-3">
+  <div class="d-flex justify-content-between mb-4">
+    <h3>Staff</h3>
+    <button
+      *ngIf="isAdmin"
+      class="btn btn-primary"
+      (click)="openAddStaffModal()"
+    >
+      <i class="fas fa-plus"></i> Add Staff
+    </button>
+  </div>
+  <div class="row">
+    <div class="col-md-4 mb-3" *ngFor="let staff of staffMembers">
+      <div
+        class="card clickable-card"
+        (click)="openModal(staff)"
+        [ngClass]="{
+          'admin-card': staff.role === 'Admin',
+          'employee-card': staff.role === 'Employee'
+        }"
+      >
+        <div class="card-body">
+          <h5 class="card-title">{{ staff.name }}</h5>
+          <p class="card-text">{{ staff.role }}</p>
         </div>
       </div>
     </div>
-  
-    <!-- Modal -->
-    <div
-      class="modal fade"
-      id="productModal"
-      tabindex="-1"
-      aria-labelledby="productModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="productModalLabel">
-              {{ selectedUser?.Name }}
-            </h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
+  </div>
+</div>
+
+<!-- Staff Detail Modal -->
+<div
+  class="modal fade"
+  id="staffModal"
+  tabindex="-1"
+  aria-labelledby="staffModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title modal-title-large" id="staffModalLabel">
+          {{ selectedStaff?.name }}
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-6">
+            <p><strong>Email:</strong></p>
+            <p><strong>Contact:</strong></p>
+            <p><strong>Address:</strong></p>
+            <p><strong>Role:</strong></p>
           </div>
-          <div class="modal-body">
-            <img [src]="" class="img-fluid" alt="..." />
-            <p><strong>User Id:</strong> {{ selectedUser?.UserId }}</p>
-            <p><strong>Email:</strong> {{ selectedUser?.Email }}</p>
-            <p><strong>Address:</strong> {{ selectedUser?.Address }}</p>
-            <p><strong>Contact:</strong> {{ selectedUser?.Contact }}</p>
-            <p><strong>Role:</strong> {{ selectedUser?.Role }}</p>
+          <div class="col-md-6">
+            <p>{{ selectedStaff?.email }}</p>
+            <p>{{ selectedStaff?.contact }}</p>
+            <p>{{ selectedStaff?.address }}</p>
+            <p>{{ selectedStaff?.role }}</p>
           </div>
         </div>
       </div>
     </div>
   </div>
-  
+</div>
+
+<!-- Add Staff Modal -->
+<div
+  class="modal fade"
+  id="addStaffModal"
+  tabindex="-1"
+  aria-labelledby="addStaffModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title modal-title-large" id="addStaffModalLabel">
+          Add New Staff
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <app-add-staff (staffAdded)="fetchStaff()"></app-add-staff>
+      </div>
+    </div>
+  </div>
+</div>

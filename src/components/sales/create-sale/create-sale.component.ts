@@ -63,11 +63,34 @@ export class CreateSaleComponent implements OnInit {
 
   onQuantityChange(index: number, event: Event): void {
     const input = event.target as HTMLInputElement;
-    this.saleItems[index].quantity = Number(input.value);
+    const quantity = Number(input.value);
+    const productId = this.saleItems[index].productId;
+    const stockQuantity = this.getStockQuantity(productId);
+    if (quantity > stockQuantity) {
+      input.value = String(stockQuantity); // Adjust input value to stock quantity
+      this.saleItems[index].quantity = stockQuantity;
+      alert('Quantity exceeds stock quantity');
+    } else {
+      this.saleItems[index].quantity = quantity;
+    }
+  }
+
+  getStockQuantity(productId: number): number {
+    const product = this.products.find((p) => p.productId === productId);
+    return product ? product.stockQuantity : 0; // Assuming `stockQuantity` is a property of the product
   }
 
   onSubmit(saleForm: NgForm): void {
-    if (saleForm.valid) {
+    let isValid = true;
+    for (let item of this.saleItems) {
+      const stockQuantity = this.getStockQuantity(item.productId);
+      if (item.quantity > stockQuantity) {
+        isValid = false;
+        break;
+      }
+    }
+
+    if (isValid && saleForm.valid) {
       const createSale: CreateSale = {
         orderDate: new Date(), // Use the current system date and time
         saleItems: this.saleItems.map((item) => ({
@@ -95,7 +118,7 @@ export class CreateSaleComponent implements OnInit {
     } else {
       this.submissionError = true;
       this.submissionSuccess = false;
-      console.error('Form is invalid');
+      console.error('Form is invalid or quantities exceed stock');
     }
   }
 

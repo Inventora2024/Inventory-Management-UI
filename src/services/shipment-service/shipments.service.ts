@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Shipment, OnlyShipment } from '../../models/shipment.model';
 
@@ -13,17 +13,33 @@ export class ShipmentsService {
 
   constructor(private http: HttpClient) {}
 
+  private getToken(): string | null {
+    return localStorage.getItem('token');
+  }
+
+  private createHeaders(): HttpHeaders {
+    const token = this.getToken();
+    let headers = new HttpHeaders();
+    if (token) {
+      headers = headers.set('Authorization', `Bearer ${token}`);
+    }
+    return headers;
+  }
+
   getShipments(): Observable<Shipment[]> {
-    return this.http.get<Shipment[]>(`${this.ordersApiUrl}`);
+    const headers = this.createHeaders();
+    return this.http.get<Shipment[]>(`${this.ordersApiUrl}`, { headers });
   }
 
   updateShipment(shipment: OnlyShipment): Observable<void> {
+    const headers = this.createHeaders();
     const url = `${this.shipmentApiUrl}/${shipment.shipmentId}`;
-    return this.http.put<void>(url, shipment);
+    return this.http.put<void>(url, shipment, { headers });
   }
 
   getShipmentById(orderId: number): Observable<Shipment> {
+    const headers = this.createHeaders();
     const url = `${this.ordersApiUrl}/${orderId}`;
-    return this.http.get<Shipment>(url);
+    return this.http.get<Shipment>(url, { headers });
   }
 }

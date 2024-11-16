@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Supplier } from '../../models/supplier.model'; // Adjust the path as needed
 
@@ -11,15 +11,31 @@ export class SuppliersService {
 
   constructor(private http: HttpClient) {}
 
+  private getToken(): string | null {
+    return localStorage.getItem('token');
+  }
+
+  private createHeaders(): HttpHeaders {
+    const token = this.getToken();
+    let headers = new HttpHeaders();
+    if (token) {
+      headers = headers.set('Authorization', `Bearer ${token}`);
+    }
+    return headers;
+  }
+
   getSuppliers(): Observable<Supplier[]> {
-    return this.http.get<Supplier[]>(this.apiUrl);
+    const headers = this.createHeaders();
+    return this.http.get<Supplier[]>(this.apiUrl, { headers });
   }
 
   getSupplier(id: number): Observable<Supplier> {
-    return this.http.get<Supplier>(`${this.apiUrl}/${id}`);
+    const headers = this.createHeaders();
+    return this.http.get<Supplier>(`${this.apiUrl}/${id}`, { headers });
   }
 
   updateSupplier(id: number, supplier: Supplier): Observable<void> {
-    return this.http.put<void>(`${this.apiUrl}/${id}`, supplier);
+    const headers = this.createHeaders();
+    return this.http.put<void>(`${this.apiUrl}/${id}`, supplier, { headers });
   }
 }

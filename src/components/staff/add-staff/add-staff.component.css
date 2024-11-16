@@ -1,0 +1,10 @@
+.modal-content {
+  background-color: #f8f9fa; /* Light background color for the entire modal */
+  padding: 20px; /* Add padding to the entire modal */
+}
+
+.container {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+}

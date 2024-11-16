@@ -12,6 +12,7 @@ import { MainHeaderComponent } from '../components/main-header/main-header.compo
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LoginComponent } from '../components/login/login.component';
 import { DropdownService } from '../services/dropdown-service/dropdown.service'; // Ensure the correct path
+import { SharedModule } from '../modules/shared.module';
 
 @Component({
   selector: 'app-root',
@@ -25,6 +26,7 @@ import { DropdownService } from '../services/dropdown-service/dropdown.service';
     MainMenuComponent,
     MainHeaderComponent,
     LoginComponent,
+    SharedModule,
   ],
   providers: [DropdownService],
   templateUrl: './app.component.html',
@@ -32,6 +34,7 @@ import { DropdownService } from '../services/dropdown-service/dropdown.service';
 })
 export class AppComponent implements OnInit {
   title = 'Inventory-Management-UI';
+  isAuthenticated: boolean = false;
 
   constructor(
     private router: Router,
@@ -39,6 +42,9 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // Check if user is logged in on init
+    this.isAuthenticated = !!localStorage.getItem('token');
+
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         // Adding a small delay to ensure DOM updates are complete
@@ -47,5 +53,15 @@ export class AppComponent implements OnInit {
         }, 100);
       }
     });
+  }
+
+  onLoginSuccess() {
+    this.isAuthenticated = true;
+  }
+
+  onLogout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.isAuthenticated = false;
   }
 }

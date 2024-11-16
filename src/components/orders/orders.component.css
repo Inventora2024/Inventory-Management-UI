@@ -9,12 +9,13 @@
   flex: 0 0 40%; /* 40% width */
   padding: 10px;
   box-sizing: border-box;
-  background-color: mediumaquamarine;
+  /* background-color: mediumaquamarine; */
 }
 
 .create-order {
   flex: 0 0 60%; /* 60% width */
   padding: 10px;
   box-sizing: border-box;
-  background-color: khaki;
+  border-left: 1px solid lightgray;
+  /* background-color: khaki; */
 }

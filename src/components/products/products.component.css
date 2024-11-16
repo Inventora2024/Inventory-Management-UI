@@ -50,5 +50,6 @@
 
 /* Blurred background effect */
 .modal-backdrop.show {
+  -webkit-backdrop-filter: blur(5px);
   backdrop-filter: blur(5px);
 }

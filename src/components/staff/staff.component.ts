@@ -1,52 +1,51 @@
-import { Component, OnInit } from '@angular/core';
-import { Users } from '../../models/users.model';
-import { UsersService } from '../../services/product-service/users.service';
-import { CommonModule } from '@angular/common';
+import { NgModule, Component, OnInit } from '@angular/core';
+import { SharedModule } from '../../modules/shared.module';
+import { UsersService } from '../../services/user-service/users.service';
+import { UserSafeData } from '../../models/user.model';
 import * as bootstrap from 'bootstrap';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HttpClientModule } from '@angular/common/http';
-import { AddUserComponent } from './add-staff/add-user.component';
-import { FormsModule } from '@angular/forms';
+import { AddStaffComponent } from './add-staff/add-staff.component';
 
 @Component({
   selector: 'app-staff',
   standalone: true,
-  imports: [CommonModule,
-  NgbModule,
-HttpClientModule,
-FormsModule],
+  imports: [SharedModule, AddStaffComponent],
   providers: [UsersService],
   templateUrl: './staff.component.html',
-  styleUrl: './staff.component.css'
+  styleUrls: ['./staff.component.css'],
 })
-export class StaffComponent implements OnInit{
-  faPLus = faPlus;
-  users:Users[]=[];
+export class StaffComponent implements OnInit {
+  staffMembers: UserSafeData[] = [];
+  selectedStaff: UserSafeData | undefined;
+  isAdmin: boolean = false;
 
-  selectedUser: Users | undefined;
-
-  constructor(private userService : UsersService){}
+  constructor(private usersService: UsersService) {}
 
   ngOnInit(): void {
-    this.userService.getUserList().subscribe((data : Users[])=>{
-      this.users = data;
-      console.log(this.users);
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    this.isAdmin = user.role === 'Admin';
+    this.fetchStaff();
+  }
+
+  fetchStaff(): void {
+    this.usersService.getUsersDisplay().subscribe((data: UserSafeData[]) => {
+      this.staffMembers = data;
     });
   }
 
-  openModal(users: Users): void {
-    this.selectedUser = users;
-    const modalElement = document.getElementById('productModal');
+  openModal(staff: UserSafeData): void {
+    this.selectedStaff = staff;
+    const modalElement = document.getElementById('staffModal');
     if (modalElement) {
       const modal = new bootstrap.Modal(modalElement);
       modal.show();
     }
   }
 
-  handleFormSubmit(userData: Users) {
-    console.log('New User Created:', userData);
-    // Here, you can handle the created user (e.g., show in a list or update UI)
+  openAddStaffModal(): void {
+    const modalElement = document.getElementById('addStaffModal');
+    if (modalElement) {
+      const modal = new bootstrap.Modal(modalElement);
+      modal.show();
+    }
   }
-
 }

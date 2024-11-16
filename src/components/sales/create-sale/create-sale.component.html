@@ -70,6 +70,15 @@
         >
           Quantity must be greater than 0.
         </div>
+        <div
+          *ngIf="
+            saleForm.submitted &&
+            item.quantity > getStockQuantity(item.productId)
+          "
+          class="text-danger"
+        >
+          Quantity exceeds stock quantity.
+        </div>
       </div>
 
       <div class="col-md-1 d-flex align-items-end">

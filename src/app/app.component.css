@@ -6,6 +6,18 @@
   background-color: darkviolet;
 }
 
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.authenticated-container {
+  width: 100%;
+  height: 100%;
+}
+
 .header-container {
   position: relative;
   width: 100%;
