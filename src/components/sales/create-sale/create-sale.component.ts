@@ -8,6 +8,7 @@ import { ProductCategorySupplierDetails } from '../../../models/product-category
 import { CreateSale, CreateSaleItem } from '../../../models/create-sale.model';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faPlus, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { DateTime } from 'luxon';
 
 interface SaleItem {
   productId: number;
@@ -92,7 +93,7 @@ export class CreateSaleComponent implements OnInit {
 
     if (isValid && saleForm.valid) {
       const createSale: CreateSale = {
-        orderDate: new Date(), // Use the current system date and time
+        orderDate: DateTime.local().toISO(), // Use the current system date and time
         saleItems: this.saleItems.map((item) => ({
           productId: item.productId,
           quantity: item.quantity,

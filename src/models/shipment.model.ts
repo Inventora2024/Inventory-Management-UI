@@ -10,6 +10,6 @@ export interface Shipment {
 export interface OnlyShipment {
   shipmentId: number;
   status: string;
-  lastUpdated: Date;
+  lastUpdated: String;
   stockOrderId: number;
 }

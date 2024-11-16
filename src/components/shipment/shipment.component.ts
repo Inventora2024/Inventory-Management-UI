@@ -17,6 +17,7 @@ import {
   faSort,
   faSave,
 } from '@fortawesome/free-solid-svg-icons';
+import { DateTime } from 'luxon';
 
 @Component({
   selector: 'app-shipment',
@@ -102,7 +103,7 @@ export class ShipmentComponent implements OnInit {
     const updatedShipment: OnlyShipment = {
       shipmentId: shipment.shipmentId,
       status: shipment.status,
-      lastUpdated: new Date(),
+      lastUpdated: DateTime.local().toISO(),
       stockOrderId: shipment.stockOrderId,
     };
 

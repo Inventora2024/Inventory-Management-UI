@@ -1,5 +1,5 @@
 export interface CreateOrder {
-  orderDate: Date;
+  orderDate: String;
   orderItems: CreateOrderItem[];
 }
 

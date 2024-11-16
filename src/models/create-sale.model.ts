@@ -1,5 +1,5 @@
 export interface CreateSale {
-  orderDate: Date;
+  orderDate: String;
   saleItems: CreateSaleItem[];
 }
 

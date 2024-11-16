@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, getLocaleDateTimeFormat } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ProductsService } from '../../../services/product-service/products.service';
 import { OrdersService } from '../../../services/order-service/orders.service';
@@ -11,6 +11,8 @@ import {
 } from '../../../models/create-order.model';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faPlus, faTimes } from '@fortawesome/free-solid-svg-icons';
+import {DateTime} from 'luxon';
+
 
 interface OrderItem {
   productId: number;
@@ -87,8 +89,9 @@ export class CreateOrderComponent implements OnInit {
 
   onSubmit(orderForm: NgForm): void {
     if (orderForm.valid) {
+      const localOrderDate = DateTime.local().toISO()
       const createOrder: CreateOrder = {
-        orderDate: new Date(),
+        orderDate: localOrderDate,
         orderItems: this.orderItems.map((item) => ({
           productId: item.productId,
           quantity: item.quantity,
